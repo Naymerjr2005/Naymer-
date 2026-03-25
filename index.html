@@ -2,26 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>naymer.vercel.app</title>
     
     <script defer data-domain="naymer.vercel.app" src="https://analytics.vgdh.io/js/script.js"></script>
 
     <script>
-        // এটি আপনার ভিজিটরকে ৩ সেকেন্ড পর অটোমেটিক গেমে নিয়ে যাবে
+        // Apnar main game link
+        var gameUrl = "https://ai.studio/apps/28ed8a47-2474-4fb9-940c-9e877e8ebf88";
+
+        function redirectGame() {
+            var ua = navigator.userAgent || navigator.vendor || window.opera;
+            var isFacebook = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Messenger") > -1);
+
+            if (isFacebook) {
+                // Messenger theke shorashori Chrome e push korbe jate Gmail na chay
+                window.location.href = "intent://" + gameUrl.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+            } else {
+                // Chrome ba onno browser theke shorashori game e niye jabe
+                window.location.replace(gameUrl);
+            }
+        }
+
+        // Shorashori redirect shuru hobe
         window.onload = function() {
-            setTimeout(function() {
-                window.location.href = "https://ai.studio/apps/28ed8a47-2474-4fb9-940c-9e877e8ebf88";
-            }, 1500); // ১.৫ সেকেন্ড সময় নিবে যাতে এনালাইটিক্স ডাটা ট্র্যাক করতে পারে
+            setTimeout(redirectGame, 500); // 0.5 sec delay analytics er jonno
         };
     </script>
+
     <style>
-        body { background-color: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; }
+        body { margin: 0; background: #0b0e14; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center; }
+        .loader { border: 3px solid #161b22; border-top: 3px solid #58a6ff; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <div style="text-align: center;">
-        <h2>Loading Verse Hub...</h2>
-        <p>Please wait a moment.</p>
+    <div>
+        <div class="loader" style="margin: 0 auto;"></div>
+        <p style="margin-top: 15px;">Loading Verse Hub...</p>
     </div>
 </body>
 </html>
