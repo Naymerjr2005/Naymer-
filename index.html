@@ -2,37 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>naymer.vercel.app</title>
     
     <script defer data-domain="naymer.vercel.app" src="https://analytics.vgdh.io/js/script.js"></script>
 
+    <script>
+        // এটি আপনার ভিজিটরকে ৩ সেকেন্ড পর অটোমেটিক গেমে নিয়ে যাবে
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = "https://ai.studio/apps/28ed8a47-2474-4fb9-940c-9e877e8ebf88";
+            }, 1500); // ১.৫ সেকেন্ড সময় নিবে যাতে এনালাইটিক্স ডাটা ট্র্যাক করতে পারে
+        };
+    </script>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            background-color: #000;
-        }
-        iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        body { background-color: #000; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; font-family: sans-serif; }
     </style>
 </head>
 <body>
-
-    <iframe src="https://ai.studio/apps/28ed8a47-2474-4fb9-940c-9e877e8ebf88" 
-            title="naymer.vercel.app"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-    </iframe>
-
+    <div style="text-align: center;">
+        <h2>Loading Verse Hub...</h2>
+        <p>Please wait a moment.</p>
+    </div>
 </body>
 </html>
