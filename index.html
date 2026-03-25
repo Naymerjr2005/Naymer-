@@ -2,70 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verse Coin Collector</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>naymer.vercel.app</title>
+    
     <script defer data-domain="naymer.vercel.app" src="https://analytics.vgdh.io/js/script.js"></script>
+
     <style>
-        body { margin: 0; background: #0d1117; color: white; font-family: 'Arial', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
-        #game-container { position: relative; width: 90vw; height: 70vh; background: #161b22; border: 2px solid #58a6ff; border-radius: 15px; overflow: hidden; }
-        .coin { position: absolute; width: 40px; height: 40px; background: gold; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: black; font-size: 12px; cursor: pointer; box-shadow: 0 0 10px gold; animation: pulse 1s infinite; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
-        #score-board { font-size: 24px; margin-bottom: 10px; color: #58a6ff; }
-        .instructions { margin-top: 10px; font-size: 14px; color: #8b949e; }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            background-color: #000;
+        }
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
     </style>
 </head>
 <body>
 
-    <div id="score-board">Score: <span id="score">0</span></div>
-    
-    <div id="game-container" onclick="missedClick()">
-        </div>
+    <iframe src="https://ai.studio/apps/28ed8a47-2474-4fb9-940c-9e877e8ebf88" 
+            title="naymer.vercel.app"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+    </iframe>
 
-    <div class="instructions">Verse Coin কালেক্ট করুন এবং স্কোর বাড়ান!</div>
-
-    <script>
-        let score = 0;
-        const scoreElement = document.getElementById('score');
-        const container = document.getElementById('game-container');
-
-        function createCoin() {
-            const coin = document.createElement('div');
-            coin.className = 'coin';
-            coin.innerText = 'VERSE';
-            
-            // Random position
-            const x = Math.random() * (container.clientWidth - 50);
-            const y = Math.random() * (container.clientHeight - 50);
-            
-            coin.style.left = x + 'px';
-            coin.style.top = y + 'px';
-
-            coin.onclick = (e) => {
-                e.stopPropagation();
-                score += 5;
-                scoreElement.innerText = score;
-                container.removeChild(coin);
-                createCoin();
-            };
-
-            container.appendChild(coin);
-
-            // Remove coin after 2 seconds if not clicked
-            setTimeout(() => {
-                if (container.contains(coin)) {
-                    container.removeChild(coin);
-                    createCoin();
-                }
-            }, 2000);
-        }
-
-        function missedClick() {
-            if (score > 0) score -= 2;
-            scoreElement.innerText = score;
-        }
-
-        // Start the game
-        createCoin();
-    </script>
 </body>
 </html>
