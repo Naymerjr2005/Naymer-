@@ -1,19 +1,71 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Naymer Project</title>
+    <title>Verse Coin Collector</title>
     <script defer data-domain="naymer.vercel.app" src="https://analytics.vgdh.io/js/script.js"></script>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; background-color: #0d1117; color: white; padding: 50px; }
-        h1 { color: #58a6ff; }
-        .btn { background: #238636; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; display: inline-block; margin-top: 20px; }
+        body { margin: 0; background: #0d1117; color: white; font-family: 'Arial', sans-serif; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; }
+        #game-container { position: relative; width: 90vw; height: 70vh; background: #161b22; border: 2px solid #58a6ff; border-radius: 15px; overflow: hidden; }
+        .coin { position: absolute; width: 40px; height: 40px; background: gold; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; color: black; font-size: 12px; cursor: pointer; box-shadow: 0 0 10px gold; animation: pulse 1s infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        #score-board { font-size: 24px; margin-bottom: 10px; color: #58a6ff; }
+        .instructions { margin-top: 10px; font-size: 14px; color: #8b949e; }
     </style>
 </head>
 <body>
-    <h1>Welcome to Naymer Project</h1>
-    <p>Building the future with Verse & AI.</p>
-    <a href="https://github.com/Naymerjr2005" class="btn">Visit My GitHub</a>
+
+    <div id="score-board">Score: <span id="score">0</span></div>
+    
+    <div id="game-container" onclick="missedClick()">
+        </div>
+
+    <div class="instructions">Verse Coin কালেক্ট করুন এবং স্কোর বাড়ান!</div>
+
+    <script>
+        let score = 0;
+        const scoreElement = document.getElementById('score');
+        const container = document.getElementById('game-container');
+
+        function createCoin() {
+            const coin = document.createElement('div');
+            coin.className = 'coin';
+            coin.innerText = 'VERSE';
+            
+            // Random position
+            const x = Math.random() * (container.clientWidth - 50);
+            const y = Math.random() * (container.clientHeight - 50);
+            
+            coin.style.left = x + 'px';
+            coin.style.top = y + 'px';
+
+            coin.onclick = (e) => {
+                e.stopPropagation();
+                score += 5;
+                scoreElement.innerText = score;
+                container.removeChild(coin);
+                createCoin();
+            };
+
+            container.appendChild(coin);
+
+            // Remove coin after 2 seconds if not clicked
+            setTimeout(() => {
+                if (container.contains(coin)) {
+                    container.removeChild(coin);
+                    createCoin();
+                }
+            }, 2000);
+        }
+
+        function missedClick() {
+            if (score > 0) score -= 2;
+            scoreElement.innerText = score;
+        }
+
+        // Start the game
+        createCoin();
+    </script>
 </body>
 </html>
