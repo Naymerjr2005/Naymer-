@@ -8,38 +8,39 @@
     <script defer data-domain="naymer.vercel.app" src="https://analytics.vgdh.io/js/script.js"></script>
 
     <script>
-        // Apnar main game link
-        var gameUrl = "https://ai.studio/apps/28ed8a47-2474-4fb9-940c-9e877e8ebf88";
-
-        function redirectGame() {
+        window.onload = function() {
+            var gameUrl = "https://ai.studio/apps/28ed8a47-2474-4fb9-940c-9e877e8ebf88";
             var ua = navigator.userAgent || navigator.vendor || window.opera;
-            var isFacebook = (ua.indexOf("FBAN") > -1) || (ua.indexOf("FBAV") > -1) || (ua.indexOf("Messenger") > -1);
+            
+            // সোশ্যাল মিডিয়া ব্রাউজার চেক (FB, Insta, Messenger, Twitter)
+            var isSocial = /FBAN|FBAV|Messenger|Instagram|Twitter|TwitterAndroid|TwitterIos/i.test(ua);
 
-            if (isFacebook) {
-                // Messenger theke shorashori Chrome e push korbe jate Gmail na chay
+            if (isSocial) {
+                // সোশ্যাল অ্যাপের ভেতরে থাকলে সরাসরি বাইরের ক্রোম/সাফারি ব্রাউজারে পুশ করবে
                 window.location.href = "intent://" + gameUrl.replace(/^https?:\/\//, "") + "#Intent;scheme=https;package=com.android.chrome;end";
+                
+                // যদি ৩ সেকেন্ডের মধ্যে ক্রোম ওপেন না হয়, তবে নরমাল রিডাইরেক্ট করবে
+                setTimeout(function() {
+                    window.location.replace(gameUrl);
+                }, 3000);
             } else {
-                // Chrome ba onno browser theke shorashori game e niye jabe
+                // ক্রোম বা টেলিগ্রামের মতো সাধারণ ব্রাউজারে থাকলে সরাসরি গেম ওপেন হবে
                 window.location.replace(gameUrl);
             }
-        }
-
-        // Shorashori redirect shuru hobe
-        window.onload = function() {
-            setTimeout(redirectGame, 500); // 0.5 sec delay analytics er jonno
         };
     </script>
 
     <style>
         body { margin: 0; background: #0b0e14; color: white; font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center; }
-        .loader { border: 3px solid #161b22; border-top: 3px solid #58a6ff; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin-bottom: 20px; }
+        .loader { border: 4px solid rgba(255,255,255,0.1); border-top: 4px solid #58a6ff; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto 20px; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
     <div>
-        <div class="loader" style="margin: 0 auto;"></div>
-        <p style="margin-top: 15px;">Loading Verse Hub...</p>
+        <div class="loader"></div>
+        <h2>Verse Hub Loading...</h2>
+        <p>Opening in a secure browser to avoid login issues.</p>
     </div>
 </body>
 </html>
